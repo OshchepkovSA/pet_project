@@ -42,17 +42,14 @@ docker-compose stop
 ```bash
 docker-compose exec web python manage.py migrate
 ```
-
 ### Создание суперпользователя
 
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
-
 ### Добавление фикстур
 
 ```bash
 docker-compose exec web python manage.py loaddata book_recipes/fixtures/initial_data.json
 ```
-
 Проект доступен по адресу http://0.0.0.0:8000
