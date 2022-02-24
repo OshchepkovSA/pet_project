@@ -35,21 +35,21 @@ docker-compose up --build
 ```bash
 docker-compose stop
 ```
-### Инициализация проекта
+## Инициализация проекта
 
-#### Применение миграций:
+### Применение миграций:
 
 ```bash
 docker-compose exec web python manage.py migrate
 ```
 
-#### Создание суперпользователя
+### Создание суперпользователя
 
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
 
-#### Добавление фикстур
+### Добавление фикстур
 
 ```bash
 docker-compose exec web python manage.py loaddata book_recipes/fixtures/initial_data.json
