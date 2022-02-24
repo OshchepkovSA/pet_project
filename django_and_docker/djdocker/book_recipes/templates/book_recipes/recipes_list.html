@@ -1,0 +1,34 @@
+{% extends 'book_recipes/base.html' %}
+
+
+{%block title%} Список рецептов {%endblock%}
+
+{%block name%} Книга рецептов {%endblock%}
+
+{%block body%}
+<form action="" method="get">
+    {{filter_recipes}}
+     <input type="submit" value="Поиск">
+</form>
+
+<form action="{%url 'search_ingredients'%}" method="get">
+    <h3 class="search-head editContent">Ингредиенты</h3>
+        {% for filter_ingredient in filter_ingredients %}
+            <input type="checkbox" class="checked" name="check_ingrs" value="{{filter_ingredient.ingredient}}">
+            <span class="span editContent">{{filter_ingredient.ingredient}}</span>
+        {% endfor %}
+<button type="submit">Найти</button>
+</form>
+
+{% for rec in recs %}
+    <div class="alert alert-warning">
+    <h2> {{ rec.name }} </h2>
+    <div> {{ rec.description }} </div>
+    {% for ingr in ingrs %}
+            {% if ingr.recipes_id == rec.name %}
+                <div><b>{{ingr.ingredient}}</b></div>
+            {% endif %}
+    {% endfor %}
+    </div>
+{% endfor %}
+{%endblock%}

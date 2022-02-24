@@ -1,0 +1,50 @@
+{% extends 'book_recipes/base.html' %}
+
+{%block title%} Список рецептов {%endblock%}
+
+{%block name%}
+<form action="{%url 'recipes_list'%}" method="get">
+<button type="submit">Назад</button>
+Найденные рецепты
+</form>
+{%endblock%}
+
+{%block body%}
+<div> Ингредиенты:
+    {% if check_ingrs %}
+        {% for check_ingr in check_ingrs %}
+                {{ check_ingr }}
+        {%endfor%}
+    {% else %}
+        Ингридиенты не заданы
+    {%endif%}
+</div>
+{% if recipes_list %}
+    {% for rec in recs %}
+        {% if rec.name in recipes_list%}
+            <div class="alert alert-warning">
+            <h2> {{ rec.name }} </h2>
+            <div> {{ rec.description }} </div>
+            {% for ingr in ingrs %}
+                    {% if ingr.recipes_id == rec.name %}
+                        <div><b>{{ingr.ingredient}}</b></div>
+                    {% endif %}
+            {% endfor %}
+            </div>
+        {%endif%}
+    {% endfor %}
+
+{% else %}
+    {% for rec in recs %}
+        <div class="alert alert-warning">
+        <h2> {{ rec.name }} </h2>
+        <div> {{ rec.description }} </div>
+        {% for ingr in ingrs %}
+                {% if ingr.recipes_id == rec.name %}
+                    <div><b>{{ingr.ingredient}}</b></div>
+                {% endif %}
+        {% endfor %}
+        </div>
+    {% endfor %}
+{%endif%}
+{%endblock%}
